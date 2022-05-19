@@ -19,20 +19,19 @@ let person3 = {
 }
 
 function objectParser(obj){
-    let keysList = Object.keys(obj)
-    // console.log(Object.keys(obj))
-    for (let i = 0; i< keysList.length ;i++){
-        if (Array.isArray(obj[keysList[i]]) ){
-            for (let j = 0; j < obj[keysList[i]].length; j++){
-                if (typeof obj[keysList[i]][j] === 'object'){
-                    objectParser(obj[keysList[i]][j])  
-                }else{
-            console.log(obj[keysList[i]][j])  
-            }
+for (const [key, value] of Object.entries(obj)){
+    if (Array.isArray(value)){
+        for (const [key1, value1] of Object.entries(value)){
+            if (typeof value1 === 'object'){
+                objectParser(value1)
+                
+            }else{
+                console.log(`My favorite ${key} is ${value1}`)
+            }  
         }
-        } else if (typeof obj[keysList[i]] =='string'){
-        console.log(obj[keysList[i]])
-        }   
+    }else{
+        console.log(`My favorite ${key} is ${value}`)
+    }
     }
 }
 objectParser(person3)
